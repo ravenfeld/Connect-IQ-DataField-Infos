@@ -61,7 +61,7 @@ class DataField extends Ui.DataField
         var display_perrcentage = App.getApp().getProperty("percentage");
         
         if(display_perrcentage){
-            dc.drawText(x+width/2 , y, Graphics.FONT_SMALL, format("$1$%", [battery.format("%d")]), Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(x+size_w/2 , y, Graphics.FONT_SMALL, format("$1$%", [battery.format("%d")]), Graphics.TEXT_JUSTIFY_CENTER);
         }else{
         	dc.fillRectangle(x + 1, y + 1, (size_w-2) * battery / 100, size_h - 2);
         }
