@@ -3,10 +3,14 @@ using Toybox.WatchUi as Ui;
 using Toybox.Application as App;
 using Toybox.Graphics as Gfx;
 
-class DataField extends Ui.DataField
+class InfosDataFieldView extends Ui.DataField
 {
 	hidden var gps;
      
+    function initialize() {
+        DataField.initialize();
+    }
+    
     function compute(info)
     {
         gps = info.currentLocationAccuracy;
@@ -144,19 +148,4 @@ class DataField extends Ui.DataField
         	dc.setColor( Gfx.COLOR_DK_RED, Gfx.COLOR_TRANSPARENT );
         }
     }
-}
-
-class InfosDataField extends App.AppBase
-{
-
-    function getInitialView()
-    {
-        return [new DataField()];
-    }
-    
-    function onSettingsChanged()
-    {
-        Ui.requestUpdate();
-    }
-
 }
