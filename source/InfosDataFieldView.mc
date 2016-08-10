@@ -3,7 +3,7 @@ using Toybox.WatchUi as Ui;
 using Toybox.Application as App;
 using Toybox.Graphics as Gfx;
 
-class DataFieldView extends Ui.DataField
+class InfosDataFieldView extends Ui.DataField
 {
 	hidden var gps;
      

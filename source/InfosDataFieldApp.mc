@@ -14,7 +14,7 @@ class InfosDataFieldApp extends App.AppBase {
     
     function getInitialView()
     {
-        return [new DataFieldView()];
+        return [new InfosDataFieldView()];
     }
     
     function onSettingsChanged()
