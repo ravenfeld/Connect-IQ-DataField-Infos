@@ -1,7 +1,8 @@
 <strings>
     <string id="AppName">Infos Système</string>
     <string id="percentage_title">Afficher le pourcentage</string>
-    <string id="color">Couleur</string>
+    <string id="battery_low_title">Batterie faible</string>
+    <string id="color">Couleur du GPS</string>
 	<string id="color_default">Défaut</string>
     <string id="color_blue">Bleu</string>
     <string id="color_blue_dark">Bleu foncé</string>

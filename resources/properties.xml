@@ -3,6 +3,7 @@
     <properties>
         <property id="percentage" type="boolean">false</property>
         <property id="default_color" type="number">0</property>
+         <property id="battery_low" type="number">15</property>
     </properties>
 
 
@@ -25,6 +26,9 @@
             	<listEntry value="10">@Strings.color_red</listEntry>
             	<listEntry value="11">@Strings.color_red_dark</listEntry>
             </settingConfig>
-        </setting> 
+        </setting>
+        <setting propertyKey="@Properties.battery_low" title="@Strings.battery_low_title" prompt="@Strings.battery_low_title">
+            <settingConfig type="numeric" min="0" max="100" />
+        </setting>  
     </settings>
 </resources>
