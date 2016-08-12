@@ -54,10 +54,9 @@ class InfosDataFieldView extends Ui.DataField
         dc.drawRectangle(x, y, size_w, size_h);
         dc.fillRectangle(x + size_w - 1, y + 7, 4, size_h - 14);   
        
-        if (battery <= 10) {
+       	var battery_low =  App.getApp().getProperty("battery_low");
+    	if(battery<=battery_low){
             dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
-        } else if (battery < 30) {
-            dc.setColor(Graphics.COLOR_YELLOW, Graphics.COLOR_TRANSPARENT);
         } else {
             dc.setColor(color, Graphics.COLOR_TRANSPARENT);
         }
