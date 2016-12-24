@@ -1,1 +1,1 @@
-*.mc linguist-language="Monkey C"
+*.mc linguist-language='Monkey C'
