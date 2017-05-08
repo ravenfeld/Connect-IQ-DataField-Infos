@@ -5,7 +5,10 @@ using Toybox.Graphics as Gfx;
 
 class InfosDataFieldView extends Ui.DataField
 {
+	hidden var SIZE_DATAFIELD_1 = 240;
 	hidden var gps;
+	hidden var old_battery_low=0;
+	hidden var old_gps_low=0;
      
     function initialize() {
         DataField.initialize();
@@ -46,12 +49,12 @@ class InfosDataFieldView extends Ui.DataField
 		var color_text = color_text_default;
 		var scale_property = App.getApp().getProperty("battery_scale");
 		var scale;
-		if(scale_property==0){
-			scale=1;
-		}else if(scale_property==1){
+		if(dc.getWidth()==SIZE_DATAFIELD_1 && dc.getHeight()==SIZE_DATAFIELD_1 && scale_property==1){
 			scale=2;
-		}else {
+		}else if(dc.getWidth()==SIZE_DATAFIELD_1 && dc.getHeight()==SIZE_DATAFIELD_1 && scale_property==2){
 			scale=2.75;
+		}else {
+			scale=1;
 		}
         var flag = getObscurityFlags();
         var width = dc.getWidth();
@@ -84,6 +87,11 @@ class InfosDataFieldView extends Ui.DataField
                  
        	var battery_low =  App.getApp().getProperty("battery_low");
     	if(battery<=battery_low){
+    		var battery_alarm =  App.getApp().getProperty("battery_alarm");
+    		if(battery_alarm && old_battery_low!=battery_low){
+    			old_battery_low=battery_low;
+    			alarm();
+    		}
     		color_text = color_text_low;
             dc.setColor(color_low, Graphics.COLOR_TRANSPARENT);
         }
@@ -108,12 +116,13 @@ class InfosDataFieldView extends Ui.DataField
         var flag = getObscurityFlags();
 		var scale_property = App.getApp().getProperty("gps_scale");
 		var scale;
-		if(scale_property==0){
-			scale=1;
-		}else if(scale_property==1){
+
+		if(dc.getWidth()==SIZE_DATAFIELD_1 && dc.getHeight()==SIZE_DATAFIELD_1 && scale_property==1){
 			scale=1.4;
-		}else {
+		}else if(dc.getWidth()==SIZE_DATAFIELD_1 && dc.getHeight()==SIZE_DATAFIELD_1 && scale_property==2){
 			scale=1.8;
+		}else {
+			scale=1;
  		}
 
         var width = dc.getWidth();
@@ -147,18 +156,24 @@ class InfosDataFieldView extends Ui.DataField
         
 		
     	if(gps!=null){
-    	if( gps == 4){
-    		dc.fillRectangle(x+size_w+space/2+space, y, size_w, bar_height);
-		}
-		if(gps >=3 ) {
-			dc.fillRectangle(x+space/2, y+size_h, size_w, bar_height-size_h);
-		}
-		if(gps >= 2 ) {
-			dc.fillRectangle(x-size_w-space/2, y+2*size_h, size_w, bar_height-2*size_h);
-		}
-		if(gps >= 1 ) {
-			dc.fillRectangle(x-size_w*2-space/2-space, y+3*size_h, size_w, bar_height-3*size_h);			
-		}
+    		var gps_low =  App.getApp().getProperty("gps_low");
+    		var gps_alarm =  App.getApp().getProperty("gps_alarm");
+    		if( gps_alarm && gps_low >= gps && old_gps_low != gps){
+    			old_gps_low = gps;
+    			alarm();
+    		}
+    		if( gps == 4){
+    			dc.fillRectangle(x+size_w+space/2+space, y, size_w, bar_height);
+			}
+			if(gps >=3 ) {
+				dc.fillRectangle(x+space/2, y+size_h, size_w, bar_height-size_h);
+			}
+			if(gps >= 2 ) {
+				dc.fillRectangle(x-size_w-space/2, y+2*size_h, size_w, bar_height-2*size_h);
+			}
+			if(gps >= 1 ) {
+				dc.fillRectangle(x-size_w*2-space/2-space, y+3*size_h, size_w, bar_height-3*size_h);			
+			}
 		}
 		dc.drawRectangle(x-size_w*2-space/2-space, y+3*size_h, size_w, bar_height-3*size_h);
 		dc.drawRectangle(x-size_w-space/2, y+2*size_h, size_w, bar_height-2*size_h);
@@ -198,5 +213,21 @@ class InfosDataFieldView extends Ui.DataField
     
     function getTextColor(){
     	return (getBackgroundColor() == Graphics.COLOR_BLACK) ? Graphics.COLOR_WHITE : Graphics.COLOR_BLACK;
-    } 
+    }
+    
+    function alarm(){
+		if (Attention has :vibrate) {
+			var vibrateData = [
+				new Attention.VibeProfile(  25, 100 ),
+				new Attention.VibeProfile(  50, 100 ),
+				new Attention.VibeProfile(  75, 100 ),
+				new Attention.VibeProfile( 100, 100 ),
+				new Attention.VibeProfile(  75, 100 ),
+				new Attention.VibeProfile(  50, 100 ),
+				new Attention.VibeProfile(  25, 100 )
+			];
+
+			Attention.vibrate(vibrateData);
+		} 
+	}
 }

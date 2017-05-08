@@ -9,9 +9,12 @@
         <property id="battery_color" type="number">0</property>
         <property id="battery_color_low" type="number">0</property>
         <property id="battery_scale" type="number">0</property>
+        <property id="battery_alarm" type="boolean">false</property>
         <property id="battery_low" type="number">15</property>
         <property id="gps_color" type="number">0</property>
         <property id="gps_scale" type="number">0</property>
+        <property id="gps_alarm" type="boolean">false</property>
+        <property id="gps_low" type="number">0</property>
     </properties>
 
 
@@ -95,7 +98,10 @@
             	<listEntry value="1">@Strings.big</listEntry>
             	<listEntry value="2">@Strings.huge</listEntry>
             </settingConfig>
-        </setting>                 
+        </setting>
+        <setting propertyKey="@Properties.battery_alarm" title="@Strings.battery_alarm_title">
+            <settingConfig type="boolean" />
+        </setting>                         
         <setting propertyKey="@Properties.battery_low" title="@Strings.battery_low_title" prompt="@Strings.battery_low_title">
             <settingConfig type="numeric" min="0" max="100" />
         </setting> 
@@ -116,11 +122,17 @@
             </settingConfig>
         </setting> 
         <setting propertyKey="@Properties.gps_scale" title="@Strings.gps_scale_title" prompt="@Strings.gps_scale_title">
-                        <settingConfig type="list" >
+             <settingConfig type="list" >
             	<listEntry value="0">@Strings.normal</listEntry>
             	<listEntry value="1">@Strings.big</listEntry>
             	<listEntry value="2">@Strings.huge</listEntry>
             </settingConfig>
-        </setting>  
+        </setting>
+        <setting propertyKey="@Properties.gps_alarm" title="@Strings.gps_alarm_title">
+            <settingConfig type="boolean" />
+        </setting>                         
+        <setting propertyKey="@Properties.gps_low" title="@Strings.gps_low_title" prompt="@Strings.battery_low_title">
+            <settingConfig type="numeric" min="0" max="4" />
+        </setting>           
     </settings>
 </resources>
