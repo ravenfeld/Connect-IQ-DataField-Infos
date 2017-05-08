@@ -1,17 +1,31 @@
 <resources>
 
     <properties>
-        <property id="percentage" type="boolean">false</property>
-        <property id="default_color" type="number">0</property>
-         <property id="battery_low" type="number">15</property>
+    	<property id="battery_display" type="boolean">true</property>
+    	<property id="gps_display" type="boolean">true</property>
+        <property id="battery_percentage" type="boolean">false</property>
+        <property id="battery_color_text" type="number">0</property>
+        <property id="battery_color_text_low" type="number">0</property>
+        <property id="battery_color" type="number">0</property>
+        <property id="battery_color_low" type="number">0</property>
+        <property id="battery_scale" type="number">0</property>
+        <property id="battery_low" type="number">15</property>
+        <property id="gps_color" type="number">0</property>
+        <property id="gps_scale" type="number">0</property>
     </properties>
 
 
     <settings>
-        <setting propertyKey="@Properties.percentage" title="@Strings.percentage_title">
+        <setting propertyKey="@Properties.battery_display" title="@Strings.battery_display_title">
+            <settingConfig type="boolean" />
+        </setting>
+        <setting propertyKey="@Properties.gps_display" title="@Strings.gps_display_title">
+            <settingConfig type="boolean" />
+        </setting>     
+        <setting propertyKey="@Properties.battery_percentage" title="@Strings.battery_percentage_title">
             <settingConfig type="boolean" />
         </setting> 
-        <setting propertyKey="@Properties.default_color" title="@Strings.color" prompt="@Strings.color">
+        <setting propertyKey="@Properties.battery_color_text" title="@Strings.battery_color_text_title" prompt="@Strings.battery_color_text_title">
             <settingConfig type="list" >
             	<listEntry value="0">@Strings.color_default</listEntry>
             	<listEntry value="1">@Strings.color_blue</listEntry>
@@ -27,8 +41,86 @@
             	<listEntry value="11">@Strings.color_red_dark</listEntry>
             </settingConfig>
         </setting>
+        <setting propertyKey="@Properties.battery_color_text_low" title="@Strings.battery_color_text_low_title" prompt="@Strings.battery_color_text_low_title">
+            <settingConfig type="list" >
+            	<listEntry value="0">@Strings.color_default</listEntry>
+            	<listEntry value="1">@Strings.color_blue</listEntry>
+            	<listEntry value="2">@Strings.color_blue_dark</listEntry>
+            	<listEntry value="3">@Strings.color_green</listEntry>
+            	<listEntry value="4">@Strings.color_green_dark</listEntry>
+            	<listEntry value="5">@Strings.color_gray_little</listEntry>
+            	<listEntry value="6">@Strings.color_gray_dark</listEntry>
+            	<listEntry value="7">@Strings.color_orange</listEntry>
+            	<listEntry value="8">@Strings.color_pink</listEntry>
+            	<listEntry value="9">@Strings.color_purple</listEntry>
+            	<listEntry value="10">@Strings.color_red</listEntry>
+            	<listEntry value="11">@Strings.color_red_dark</listEntry>
+            </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.battery_color" title="@Strings.battery_color_title" prompt="@Strings.battery_color_title">
+            <settingConfig type="list" >
+            	<listEntry value="0">@Strings.color_default</listEntry>
+            	<listEntry value="1">@Strings.color_blue</listEntry>
+            	<listEntry value="2">@Strings.color_blue_dark</listEntry>
+            	<listEntry value="3">@Strings.color_green</listEntry>
+            	<listEntry value="4">@Strings.color_green_dark</listEntry>
+            	<listEntry value="5">@Strings.color_gray_little</listEntry>
+            	<listEntry value="6">@Strings.color_gray_dark</listEntry>
+            	<listEntry value="7">@Strings.color_orange</listEntry>
+            	<listEntry value="8">@Strings.color_pink</listEntry>
+            	<listEntry value="9">@Strings.color_purple</listEntry>
+            	<listEntry value="10">@Strings.color_red</listEntry>
+            	<listEntry value="11">@Strings.color_red_dark</listEntry>
+            </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.battery_color_low" title="@Strings.battery_color_low_title" prompt="@Strings.battery_color_low_title">
+            <settingConfig type="list" >
+            	<listEntry value="0">@Strings.color_default</listEntry>
+            	<listEntry value="1">@Strings.color_blue</listEntry>
+            	<listEntry value="2">@Strings.color_blue_dark</listEntry>
+            	<listEntry value="3">@Strings.color_green</listEntry>
+            	<listEntry value="4">@Strings.color_green_dark</listEntry>
+            	<listEntry value="5">@Strings.color_gray_little</listEntry>
+            	<listEntry value="6">@Strings.color_gray_dark</listEntry>
+            	<listEntry value="7">@Strings.color_orange</listEntry>
+            	<listEntry value="8">@Strings.color_pink</listEntry>
+            	<listEntry value="9">@Strings.color_purple</listEntry>
+            	<listEntry value="10">@Strings.color_red</listEntry>
+            	<listEntry value="11">@Strings.color_red_dark</listEntry>
+            </settingConfig>
+        </setting> 
+        <setting propertyKey="@Properties.battery_scale" title="@Strings.battery_scale_title" prompt="@Strings.battery_scale_title">
+                        <settingConfig type="list" >
+            	<listEntry value="0">@Strings.normal</listEntry>
+            	<listEntry value="1">@Strings.big</listEntry>
+            	<listEntry value="2">@Strings.huge</listEntry>
+            </settingConfig>
+        </setting>                 
         <setting propertyKey="@Properties.battery_low" title="@Strings.battery_low_title" prompt="@Strings.battery_low_title">
             <settingConfig type="numeric" min="0" max="100" />
+        </setting> 
+                <setting propertyKey="@Properties.gps_color" title="@Strings.gps_color_title" prompt="@Strings.gps_color_title">
+            <settingConfig type="list" >
+            	<listEntry value="0">@Strings.color_default</listEntry>
+            	<listEntry value="1">@Strings.color_blue</listEntry>
+            	<listEntry value="2">@Strings.color_blue_dark</listEntry>
+            	<listEntry value="3">@Strings.color_green</listEntry>
+            	<listEntry value="4">@Strings.color_green_dark</listEntry>
+            	<listEntry value="5">@Strings.color_gray_little</listEntry>
+            	<listEntry value="6">@Strings.color_gray_dark</listEntry>
+            	<listEntry value="7">@Strings.color_orange</listEntry>
+            	<listEntry value="8">@Strings.color_pink</listEntry>
+            	<listEntry value="9">@Strings.color_purple</listEntry>
+            	<listEntry value="10">@Strings.color_red</listEntry>
+            	<listEntry value="11">@Strings.color_red_dark</listEntry>
+            </settingConfig>
+        </setting> 
+        <setting propertyKey="@Properties.gps_scale" title="@Strings.gps_scale_title" prompt="@Strings.gps_scale_title">
+                        <settingConfig type="list" >
+            	<listEntry value="0">@Strings.normal</listEntry>
+            	<listEntry value="1">@Strings.big</listEntry>
+            	<listEntry value="2">@Strings.huge</listEntry>
+            </settingConfig>
         </setting>  
     </settings>
 </resources>

@@ -1,8 +1,16 @@
 <strings>
     <string id="AppName">Infos System</string>
-    <string id="percentage_title">Display percentage</string>
+    <string id="battery_display_title">Display battery</string>
+    <string id="gps_display_title">GPS battery</string>
+    <string id="battery_percentage_title">Display battery percentage</string>
     <string id="battery_low_title">Battery low</string>
-    <string id="color">Color GPS</string>
+    <string id="battery_color_text_title">Battery color text</string>
+    <string id="battery_color_text_low_title">Battery color text low</string>
+    <string id="battery_color_title">Battery color</string>
+    <string id="battery_color_low_title">Battery color low</string>
+    <string id="battery_scale_title">Battery scale</string>
+    <string id="gps_color_title">GPS color low</string>
+    <string id="gps_scale_title">GPS scale</string>
     <string id="color_default">Default</string>
     <string id="color_blue">Blue</string>
     <string id="color_blue_dark">Blue dark</string>
@@ -15,4 +23,7 @@
     <string id="color_purple">Purple</string>
     <string id="color_red">Red</string>
     <string id="color_red_dark">Red dark</string>
+    <string id="normal">Normal</string>
+    <string id="big">Big</string>
+    <string id="huge">Huge</string>
 </strings>
