@@ -1,8 +1,19 @@
 <strings>
     <string id="AppName">Infos Système</string>
-    <string id="percentage_title">Afficher le pourcentage</string>
-    <string id="battery_low_title">Batterie faible</string>
-    <string id="color">Couleur du GPS</string>
+    <string id="battery_display_title">Affichage de la batterie</string>
+    <string id="gps_display_title">Affichage du GPS</string>
+    <string id="battery_percentage_title">Affichage du pourcentage</string>
+    <string id="battery_low_title">Niveau batterie faible</string>
+    <string id="battery_alarm_title">Activer la vibration batterie faible</string>
+    <string id="battery_color_text_title">Couleur texte de la batterie</string>
+    <string id="battery_color_text_low_title">Couleur texte batterie faible</string>
+    <string id="battery_color_title">Couleur de la batterie</string>
+    <string id="battery_color_low_title">Couleur de la batterie faible</string>
+    <string id="battery_scale_title">Echélle batterie</string>
+    <string id="gps_color_title">Couleur GPS</string>
+    <string id="gps_scale_title">Echélle GPS</string>
+    <string id="gps_alarm_title">Activer la vibration GPS faible</string>
+    <string id="gps_low_title">GPS faible</string>
 	<string id="color_default">Défaut</string>
     <string id="color_blue">Bleu</string>
     <string id="color_blue_dark">Bleu foncé</string>
@@ -15,4 +26,7 @@
     <string id="color_purple">Violet</string>
     <string id="color_red">Rouge</string>
     <string id="color_red_dark">Rouge foncé</string>
+    <string id="normal">Normal</string>
+    <string id="big">Grand</string>
+    <string id="huge">Énorme</string>
 </strings>
