@@ -131,7 +131,7 @@
         <setting propertyKey="@Properties.gps_alarm" title="@Strings.gps_alarm_title">
             <settingConfig type="boolean" />
         </setting>                         
-        <setting propertyKey="@Properties.gps_low" title="@Strings.gps_low_title" prompt="@Strings.battery_low_title">
+        <setting propertyKey="@Properties.gps_low" title="@Strings.gps_low_title" prompt="@Strings.gps_low_title">
             <settingConfig type="numeric" min="0" max="4" />
         </setting>           
     </settings>
