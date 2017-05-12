@@ -10,7 +10,7 @@
     <string id="battery_color_title">Battery color</string>
     <string id="battery_color_low_title">Battery color low</string>
     <string id="battery_scale_title">Battery scale</string>
-    <string id="gps_color_title">GPS color low</string>
+    <string id="gps_color_title">GPS color</string>
     <string id="gps_scale_title">GPS scale</string>
     <string id="gps_alarm_title">GPS vibrate low enable</string>
     <string id="gps_low_title">GPS low</string>
