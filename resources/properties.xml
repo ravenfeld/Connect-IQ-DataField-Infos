@@ -3,7 +3,7 @@
     <properties>
     	<property id="battery_display" type="boolean">true</property>
     	<property id="gps_display" type="boolean">true</property>
-        <property id="battery_percentage" type="boolean">false</property>
+        <property id="battery_percentage" type="boolean">true</property>
         <property id="battery_color_text" type="number">0</property>
         <property id="battery_color_text_low" type="number">0</property>
         <property id="battery_color" type="number">0</property>

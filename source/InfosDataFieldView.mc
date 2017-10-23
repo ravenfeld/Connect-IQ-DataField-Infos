@@ -5,7 +5,7 @@ using Toybox.Graphics as Gfx;
 
 class InfosDataFieldView extends Ui.DataField
 {
-	hidden var SIZE_DATAFIELD_1 = 240;
+	hidden var data_field_1;
 	hidden var gps;
 	hidden var old_battery_low=0;
 	hidden var old_gps_low=0;
@@ -24,18 +24,27 @@ class InfosDataFieldView extends Ui.DataField
     	var battery =  App.getApp().getProperty("battery_display");
     	var gps =  App.getApp().getProperty("gps_display");
     	var x = dc.getWidth()/2;
-        
+    	var flag = getObscurityFlags();
+        data_field_1 = flag==OBSCURE_BOTTOM+OBSCURE_TOP+OBSCURE_RIGHT+OBSCURE_LEFT;
     	if(battery){
     		var y = dc.getWidth()/2;
     		if(gps){
-    			y = dc.getHeight()/4;
+    			if(data_field_1){
+    				y = dc.getHeight()/4+10;
+    			}else{
+    				y = dc.getHeight()/4;
+    			}
     		}
 			drawBattery(System.getSystemStats().battery,x,y,dc);
 		}
 		if(gps){
 		   	var y = dc.getHeight()/2;
     		if(battery){
-    			y = y + dc.getHeight()/4;
+    			if(data_field_1){
+    				y = y + dc.getHeight()/4-10;
+    			}else{
+    				y = y + dc.getHeight()/4;
+    			}
     		}
 			drawGPS(x,y,dc);
 		}		
@@ -49,41 +58,49 @@ class InfosDataFieldView extends Ui.DataField
 		var color_text = color_text_default;
 		var scale_property = App.getApp().getProperty("battery_scale");
 		var scale;
-		if(dc.getWidth()==SIZE_DATAFIELD_1 && dc.getHeight()==SIZE_DATAFIELD_1 && scale_property==1){
+		if(data_field_1 && scale_property==1){
 			scale=2;
-		}else if(dc.getWidth()==SIZE_DATAFIELD_1 && dc.getHeight()==SIZE_DATAFIELD_1 && scale_property==2){
+		}else if(data_field_1 && scale_property==2){
 			scale=2.75;
 		}else {
 			scale=1;
 		}
-        var flag = getObscurityFlags();
-        var width = dc.getWidth();
-        var height = dc.getHeight()/2;
-        var size_w = 50*scale;
-        var size_h = 27*scale;
+                
+       	var font = Graphics.FONT_SMALL;
+       	if (data_field_1 && scale_property == 1 ){
+       		font = Graphics.FONT_NUMBER_MEDIUM;
+       	}else if (data_field_1 && scale_property == 2){
+       		font = Graphics.FONT_NUMBER_HOT;
+        }
+        	
+        var size_text = dc.getTextDimensions("888%", font);
+        var size_w = size_text[0]+5;
+        var size_h = size_text[1];
     	x = x-size_w/2;
-        y = y- size_h/2+5;
-          
+        y = y- size_h/2;
+                    
         dc.setColor( color, Gfx.COLOR_TRANSPARENT );
+		if(!data_field_1){
+			var flag = getObscurityFlags();
+        	if(flag>=OBSCURE_BOTTOM){
+        		y = y;
+        		flag=flag-OBSCURE_BOTTOM;
+        	}                
+        	if(flag>=OBSCURE_RIGHT){
+        		x = x-10;
+        		flag=flag-OBSCURE_RIGHT;
+        	} 
+        	if(flag>=OBSCURE_TOP){
+            	y = y+size_h/3;
+        		flag=flag-OBSCURE_TOP;
+        	}
+        	if(flag>=OBSCURE_LEFT){
+            	x = x+10;
+        	}
+        }
 
-        if(flag>=OBSCURE_BOTTOM){
-        	y = y-10;
-        	flag=flag-OBSCURE_BOTTOM;
-        }                
-        if(flag>=OBSCURE_RIGHT){
-        	x = x-10;
-        	flag=flag-OBSCURE_RIGHT;
-        } 
-        if(flag>=OBSCURE_TOP){
-            y = y+15;
-        	flag=flag-OBSCURE_TOP;
-        }
-        if(flag>=OBSCURE_LEFT){
-            x = x+10;
-        }
-                  
         dc.drawRectangle(x, y, size_w, size_h);
-        dc.fillRectangle(x + size_w - 1, y + 7, 4*scale, size_h - 14); 
+        dc.fillRectangle(x + size_w - 1, y + size_h/6, size_w/15, size_h - size_h/3); 
                  
        	var battery_low =  App.getApp().getProperty("battery_low");
     	if(battery<=battery_low){
@@ -99,27 +116,21 @@ class InfosDataFieldView extends Ui.DataField
         var display_percentage = App.getApp().getProperty("battery_percentage");
         
         if(display_percentage){
-        	var font = Graphics.FONT_SMALL;
-        	if (scale_property == 1 ){
-        		font = Graphics.FONT_NUMBER_MEDIUM;
-        	}else if (scale_property == 2){
-        		font = Graphics.FONT_NUMBER_HOT;
-        	}
         	dc.setColor(color_text, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(x+size_w/2 , y+size_h/2, font, format("$1$%", [battery.format("%d")]), Graphics.TEXT_JUSTIFY_VCENTER| Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(x+size_w/2 , y, font, format("$1$%", [battery.format("%d")]),Graphics.TEXT_JUSTIFY_CENTER);
         }else{
         	dc.fillRectangle(x + 1, y + 1, (size_w-2) * battery / 100, size_h - 2);
         }
     }
         
     function drawGPS(x,y,dc){    
-        var flag = getObscurityFlags();
+    
 		var scale_property = App.getApp().getProperty("gps_scale");
 		var scale;
 
-		if(dc.getWidth()==SIZE_DATAFIELD_1 && dc.getHeight()==SIZE_DATAFIELD_1 && scale_property==1){
+		if(data_field_1 && scale_property==1){
 			scale=1.4;
-		}else if(dc.getWidth()==SIZE_DATAFIELD_1 && dc.getHeight()==SIZE_DATAFIELD_1 && scale_property==2){
+		}else if(data_field_1 && scale_property==2){
 			scale=1.8;
 		}else {
 			scale=1;
@@ -132,29 +143,31 @@ class InfosDataFieldView extends Ui.DataField
         var size_w = width/12 * scale;
         var size_h = bar_height/4 ;
         var space = size_w/4;
-        
+                
         y = y -bar_height/2;
         
         var color = getColor(App.getApp().getProperty("gps_color"), getTextColor());
         dc.setColor(color, Graphics.COLOR_TRANSPARENT);
         
-        if(flag>=OBSCURE_BOTTOM){
-        	y = y-15;
-        	flag=flag-OBSCURE_BOTTOM;
-        } 
-        if(flag>=OBSCURE_RIGHT){
-        	x = x-10;
-        	flag=flag-OBSCURE_RIGHT;
-        }
-        if(flag>=OBSCURE_TOP){
-            y = y+5;
-        	flag=flag-OBSCURE_TOP;
-        } 
-        if(flag>=OBSCURE_LEFT){
-            x = x+10;
+        if(!data_field_1){
+        	var flag = getObscurityFlags();
+        	if(flag>=OBSCURE_BOTTOM){
+        		y = y-bar_height/2;
+        		flag=flag-OBSCURE_BOTTOM;
+        	} 
+        	if(flag>=OBSCURE_RIGHT){
+        		x = x-10;
+        		flag=flag-OBSCURE_RIGHT;
+        	}
+        	if(flag>=OBSCURE_TOP){
+            	y = y;
+        		flag=flag-OBSCURE_TOP;
+        	} 
+        	if(flag>=OBSCURE_LEFT){
+            	x = x+10;
+        	}
         }
         
-		
     	if(gps!=null){
     		var gps_low =  App.getApp().getProperty("gps_low");
     		var gps_alarm =  App.getApp().getProperty("gps_alarm");
